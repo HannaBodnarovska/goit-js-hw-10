@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Homework 10</title>
-  </head>
-  <body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cat Search</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Cat Search</h1>
+    <div class="loader"></div>
+    <div class="error">An error occurred. Please try again.</div>
     <select class="breed-select"></select>
-    <p class="loader">Loading data, please wait...</p>
-    <p class="error">Oops! Something went wrong! Try reloading the page!</p>
-    <div class="cat-info"></div>
-
-    <script src="index.js" type="module"></script>
-  </body>
+    <div class="cat-info">
+      <img class="cat-image" src="" alt="Cat Image">
+      <h2 class="breed-name"></h2>
+      <p class="description"></p>
+      <p class="temperament"></p>
+    </div>
+  </div>
+  <script src="cat-api.js"></script>
+  <script src="app.js"></script>
+</body>
 </html>
