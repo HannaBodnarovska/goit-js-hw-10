@@ -1,7 +1,8 @@
 import axios from "axios";
-import Notiflix from "notiflix"; 
-
+import Notiflix from "notiflix";
 import { fetchBreeds, fetchCatByBreed } from "./cat-api.js";
+
+axios.defaults.headers.common["x-api-key"] = "live_H719qlovNp5onk7SgALaQO9nCvFcNpHdtVeXT8E7vMLN7oXTPHXifZWyA6P2P7um";
 
 const breedSelect = document.querySelector(".breed-select");
 const catInfo = document.querySelector(".cat-info");
@@ -17,12 +18,7 @@ Notiflix.Notify.init({ position: "right-bottom", timeout: 3000 });
 async function populateBreeds() {
   try {
     const breeds = await fetchBreeds();
-    breeds.forEach((breed) => {
-      const option = document.createElement("option");
-      option.value = breed.id;
-      option.textContent = breed.name;
-      breedSelect.appendChild(option);
-    });
+    breedSelect.innerHTML = breeds.map(breed => `<option value="${breed.id}">${breed.name}</option>`).join("");
   } catch (error) {
     showError();
   } finally {
@@ -34,10 +30,11 @@ async function populateBreeds() {
 async function fetchAndDisplayCat(breedId) {
   try {
     const cat = await fetchCatByBreed(breedId);
+    const selectedBreed = cat.breeds[0];
     catImage.src = cat.url;
-    breedName.textContent = cat.breeds[0].name;
-    description.textContent = cat.breeds[0].description;
-    temperament.textContent = `Temperament: ${cat.breeds[0].temperament}`;
+    breedName.textContent = selectedBreed.name;
+    description.textContent = selectedBreed.description;
+    temperament.textContent = `Temperament: ${selectedBreed.temperament}`;
     catInfo.style.display = "block";
   } catch (error) {
     showError();
